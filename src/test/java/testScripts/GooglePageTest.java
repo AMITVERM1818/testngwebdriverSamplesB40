@@ -55,7 +55,7 @@ public void seleniumSearchTest() {
 	  
 //	  We use Assert for validation in TestNG
 	  Assert.assertEquals(driver.getTitle(), "Selenium Tutorial - Google Search");
-	  System.out.println("Testing TestNG");
+	  
 	  	  
 }
   
