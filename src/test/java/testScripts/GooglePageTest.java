@@ -11,6 +11,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 
 public class GooglePageTest {
@@ -26,24 +27,30 @@ public class GooglePageTest {
 //	TestNG Class with Test Method
 //	Test-1
 	
-  @Test
+//  @Test(dependsOnMethods="seleniumSearchTest")
+  @Test(alwaysRun=true, dependsOnMethods="seleniumSearchTest")
   public void javaSearchTest() {
 	  
 	  driver.manage().window().maximize();
 	  driver.get("https://www.google.com/");
+	  SoftAssert softAssert = new SoftAssert(); 
+//	  softAssert.assertEquals(driver.getTitle(), "Google Page");
 	  WebElement srcBox = driver.findElement(By.id("APjFqb"));
 	  srcBox.sendKeys("Java Tutorial");
 	  srcBox.submit();
 //	  srcBox.sendKeys(Keys.ENTER);
+//	  Soft Assert
+	  softAssert.assertEquals(driver.getTitle(), "Java Tutorial - Google Search");
+	  softAssert.assertAll();
 	  
-//	  We use Assert for validation in TestNG
-	  Assert.assertEquals(driver.getTitle(), "Java Tutorial - Google Search");	 
+//	  We use Assert for validation in TestNG - Hard Assert
+//	  Assert.assertEquals(driver.getTitle(), "Java Tutorial - Google Search");	 
 	  	  
   }
   
 //	Test-2
 	
-@Test
+@Test()
 public void seleniumSearchTest() {
 	  
 	  driver.manage().window().maximize();
@@ -54,11 +61,36 @@ public void seleniumSearchTest() {
 //	  srcBox.sendKeys(Keys.ENTER);
 	  
 //	  We use Assert for validation in TestNG
-	  Assert.assertEquals(driver.getTitle(), "Selenium Tutorial - Google Search");
+	  Assert.assertEquals(driver.getTitle(), "Selenium Tutorial - Google Search Page");
 	  
 	  	  
 }
-  
+ 
+//@Test(enabled=false)
+//public void cypressSearchTest() {
+//	  
+//	  driver.manage().window().maximize();
+//	  driver.get("https://www.google.com/");
+//	  WebElement srcBox = driver.findElement(By.id("APjFqb"));
+//	  srcBox.sendKeys("Cypress Tutorial");
+//	  srcBox.submit();
+//	  Assert.assertEquals(driver.getTitle(), "Cypress Tutorial - Google Search");
+//	 	  	  
+//}
+//
+//@Test(enabled=false)
+//public void aapiumSearchTest() {
+//	  
+//	  driver.manage().window().maximize();
+//	  driver.get("https://www.google.com/");
+//	  WebElement srcBox = driver.findElement(By.id("APjFqb"));
+//	  srcBox.sendKeys("Appium Tutorial");
+//	  srcBox.submit();
+//	  Assert.assertEquals(driver.getTitle(), "Appium Tutorial - Google Search");
+//	  	  	  
+//}
+
+
 //	@AfterMethod
 	@AfterTest
 	public void tearDown() {
