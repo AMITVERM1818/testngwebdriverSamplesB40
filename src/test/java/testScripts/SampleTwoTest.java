@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 public class SampleTwoTest {
 	WebDriver driver;
-  @Test
+  @Test(retryAnalyzer = RetryAnalyzer.class)
   public void playwrightSearchTest() {
 	  driver = new ChromeDriver();
 	  driver.manage().window().maximize();
@@ -19,6 +19,7 @@ public class SampleTwoTest {
 	  WebElement srcBox = driver.findElement(By.id("APjFqb"));
 	  srcBox.sendKeys("Playwright Tutorial");
 	  srcBox.submit();
-	  Assert.assertEquals(driver.getTitle(), "Playwright Tutorial - Google Search");
+	  Assert.assertEquals(driver.getTitle(), "Playwright Tutorial - Google Search Page");
+	  
   }
 }

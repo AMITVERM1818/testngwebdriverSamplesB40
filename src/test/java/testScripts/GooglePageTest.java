@@ -13,15 +13,26 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+
 
 public class GooglePageTest {
 	WebDriver driver;
+	
+//	ExtentReports	
+	ExtentReports reports;
+	ExtentSparkReporter spark;
+	ExtentTest extentTest;
 	
 //  @BeforeMethod
 	@BeforeTest
   public void setup() {
 	  
 	  driver = new ChromeDriver();
+	  reports = new ExtentReports();
+	  spark = new ExtentSparkReporter("target/SparkReport.html");
   }
 	
 //	TestNG Class with Test Method
@@ -66,6 +77,7 @@ public void seleniumSearchTest() {
 	  	  
 }
  
+// To disable a script from running
 //@Test(enabled=false)
 //public void cypressSearchTest() {
 //	  
